@@ -75,7 +75,7 @@ var Pagination = window.Pagination || (function(setting){
 			var _this = this;
 			new Ajax({
 				type : "get",
-				url : _this.userObj.dataUrl + "?pageindex=" + _this.userObj.getCurrentIndex() + "&pagesize=" + _this.userObj.pageSize,
+				url : _this.userObj.dataUrl + (~_this.userObj.dataUrl.indexOf("?") ? "&" : "?") + "pageindex=" + _this.userObj.getCurrentIndex() + "&pagesize=" + _this.userObj.pageSize,
 				dataType : "json",
 				success : function(data){
 					callback(function(){
