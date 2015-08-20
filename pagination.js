@@ -145,17 +145,18 @@ var Pagination = window.Pagination || (function(setting){
 	/*分页插件*/
 	function Pagination(obj){
 		this.receiveObj = obj;
-		this.pageSize = this.receiveObj.pageSize;
-		this.totalPage = this.receiveObj.totalPage;
-		this.dataUrl = this.receiveObj.dataUrl;
-		this.firstRequire = this.receiveObj.firstRequire;
-		this.render = this.receiveObj.render;
 		this.currentIndex = 0;
 		this.prevIndex = 0;
+		this._setSetting();
 		this._init();
 	}
 	Pagination.prototype = {
 		constructor : Pagination,
+		_setSetting : function(){
+			for(var i in this.receiveObj){
+				this[i] = this.receiveObj[i];
+			}
+		},
 		_init : function(){
 			this._setAll();
 			this.oButton[0].dom.click();
