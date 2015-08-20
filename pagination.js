@@ -55,7 +55,7 @@ var Pagination = window.Pagination || (function(setting){
 	    }
 	};
 	/*按钮*/
-	function Button(userObj, index, className){
+	function Button(userObj, index){
 		this.userObj = userObj;
 		this.index = index;
 		this._init();
