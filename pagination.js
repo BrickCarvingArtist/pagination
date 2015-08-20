@@ -94,15 +94,22 @@ var Pagination = window.Pagination || (function(setting){
 	Page.prototype._setText = function(){
 		this.dom.innerHTML = this.index + 1;
 	};
+	Page.prototype._setCurrent = function(){
+		this.userObj.setCurrentIndex(this.index);
+		this.userObj.oButton[this.userObj.getPrevIndex()].dom.className = this.className;
+		this.dom.className = this.className.replace(/normal/, "current");
+	};
 	Page.prototype._addEvent = function(){
 		var _this = this;
 		this.dom.onclick = function(){
-			_this._getData(function(render){
-				render();
-				_this.userObj.setCurrentIndex(_this.index);
-				_this.userObj.oButton[_this.userObj.getPrevIndex()].dom.className = _this.className;
-				_this.dom.className = _this.className.replace(/normal/, "current");
-			});
+			if(_this.userObj.firstRequire){
+				_this._getData(function(render){
+					render();
+					_this._setCurrent();
+				});
+			}
+			_this.userObj.firstRequire = 1;
+			_this._setCurrent();
 		};
 	};
 	/*上一页*/
@@ -141,6 +148,7 @@ var Pagination = window.Pagination || (function(setting){
 		this.pageSize = this.receiveObj.pageSize;
 		this.totalPage = this.receiveObj.totalPage;
 		this.dataUrl = this.receiveObj.dataUrl;
+		this.firstRequire = this.receiveObj.firstRequire;
 		this.render = this.receiveObj.render;
 		this.currentIndex = 0;
 		this.prevIndex = 0;
