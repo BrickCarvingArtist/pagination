@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="reset.css" />
+		<link rel="stylesheet" href="pagination.css" />
+		<title>分页</title>
+	</head>
+	<body>
+		<div class="pagination" id="pagination"></div>
+		<script src="pagination.js"></script>
+		<script>
+			new Pagination({//实例化分页插件
+				position : "pagination",//必选，父容器标签id
+				totalPage : 5,//必选，总页数
+				pageSize : 12,//必选，每页条数
+				dataUrl : "/product.json",//必选，列表内容接口
+				render : function(){//必选，渲染每页内容
+					console.log(123);
+				}
+			});
+		</script>
+	</body>
+</html>

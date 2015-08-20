@@ -1,0 +1,23 @@
+.pagination{
+	float:left;
+	width:100%;
+	text-align:center;
+}
+.pagination .prev, .pagination .next, .pagination .normal{
+	color:rgb(151, 148, 148);
+	background-color:rgb(255, 255, 255);
+	border:1px solid rgb(179, 179, 179);
+}
+.pagination .button{
+	display:inline-block;
+	margin-right:8px;
+	padding:4px 8px;
+	font-size:14px;
+	border-radius:2px;
+}
+.pagination .current, .pagination .button:hover{
+	padding:5px 9px;
+	color:rgb(255, 255, 255);
+	background-color:rgb(55, 141, 233);
+	border:none;
+}
