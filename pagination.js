@@ -79,7 +79,7 @@ var Pagination = window.Pagination || (function(setting){
 				dataType : "json",
 				success : function(data){
 					callback(function(){
-						_this.userObj.render();
+						_this.userObj.render(data);
 					});
 				}
 			});
