@@ -55,7 +55,7 @@ var Pagination = window.Pagination || (function(setting){
 	    }
 	};
 	/*按钮*/
-	function Button(userObj, index){
+	function Button(userObj, index, className){
 		this.userObj = userObj;
 		this.index = index;
 		this._init();
@@ -75,7 +75,7 @@ var Pagination = window.Pagination || (function(setting){
 			var _this = this;
 			new Ajax({
 				type : "get",
-				url : _this.userObj.dataUrl + (~_this.userObj.dataUrl.indexOf("?") ? "&" : "?") + "pageindex=" + _this.userObj.getCurrentIndex() + "&pagesize=" + _this.userObj.pageSize,
+				url : _this.userObj.dataUrl + (~_this.userObj.dataUrl.indexOf("?") ? "&" : "?") + "pageindex=" + (_this.userObj.getCurrentIndex() + 1) + "&pagesize=" + _this.userObj.pageSize,
 				dataType : "json",
 				success : function(data){
 					callback(function(){
@@ -95,21 +95,22 @@ var Pagination = window.Pagination || (function(setting){
 		this.dom.innerHTML = this.index + 1;
 	};
 	Page.prototype._setCurrent = function(){
-		this.userObj.setCurrentIndex(this.index);
 		this.userObj.oButton[this.userObj.getPrevIndex()].dom.className = this.className;
 		this.dom.className = this.className.replace(/normal/, "current");
 	};
 	Page.prototype._addEvent = function(){
 		var _this = this;
 		this.dom.onclick = function(){
+			_this.userObj.setCurrentIndex(_this.index);
 			if(_this.userObj.firstRequire){
 				_this._getData(function(render){
 					render();
 					_this._setCurrent();
 				});
+			}else{
+				_this.userObj.firstRequire = 1;
+				_this._setCurrent();
 			}
-			_this.userObj.firstRequire = 1;
-			_this._setCurrent();
 		};
 	};
 	/*上一页*/
