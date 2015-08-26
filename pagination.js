@@ -186,7 +186,7 @@ var Pagination = window.Pagination || (function(setting){
 		setCurrentIndex : function(index){
 			var prevIndex = this.currentIndex;
 			this.prevIndex = prevIndex;
-			this.currentIndex = index > 0 ? index < this.pageSize - 1 ? index : this.pageSize - 1 : 0;
+			this.currentIndex = index > 0 ? index < this.totalPage - 1 ? index : this.totalPage - 1 : 0;
 		},
 		getCurrentIndex : function(){
 			return this.currentIndex;
