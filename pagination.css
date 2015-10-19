@@ -1,14 +1,18 @@
+::selection{
+	background-color:transparent;
+}
 .pagination{
 	float:left;
 	width:100%;
 	text-align:center;
 }
 .pagination .prev, .pagination .next, .pagination .normal{
+	cursor:pointer;
 	color:rgb(151, 148, 148);
 	background-color:rgb(255, 255, 255);
 	border:1px solid rgb(179, 179, 179);
 }
-.pagination .button{
+.pagination span{
 	display:inline-block;
 	margin-right:8px;
 	padding:4px 8px;
