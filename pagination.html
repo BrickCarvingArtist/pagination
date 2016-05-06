@@ -13,10 +13,12 @@
 			new Pagination({//实例化分页插件
 				position : "pagination",//必选，父容器标签id
 				pageIndex : 1,//必选，初始页码
-				totalPage : 5,//必选，总页数
 				pageSize : 12,//必选，每页条数
 				dataUrl : "/product.json",//必选，列表内容接口
-				fisrtRequire : false,//必选，初始化时是否请求数据
+				queryString : {
+					name : 1
+				},//可选,筛选条件(下一版有空时补充)
+				firstRequest : false,//必选，初始化时是否请求数据
 				render : function(data){//必选，渲染每页内容
 					console.log(data);
 				}
