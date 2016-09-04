@@ -1,26 +1,73 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" href="reset.css" />
-		<link rel="stylesheet" href="pagination.css" />
-		<title>分页</title>
+		<meta charset="utf-8" />
+		<!--引入pagination.js组件样式-->
+		<link rel="stylesheet" href="pagination.min.css" />
+		<title>Pagination</title>
 	</head>
 	<body>
-		<div class="pagination" id="pagination"></div>
-		<script src="pagination.js"></script>
+		<!--数据呈现区-->
+		<div class="showcase"></div>
+		<!--分页组件插入位置元素, 必须添加pagination这个类名-->
+		<div class="pagination"></div>
+		<!--引入pagination.js组件脚本-->
+		<script src="pagination.min.js"></script>
 		<script>
-			new Pagination({//实例化分页插件
-				position : "pagination",//必选，父容器标签id
-				pageIndex : 1,//必选，初始页码
-				pageSize : 12,//必选，每页条数
-				dataUrl : "/product.json",//必选，列表内容接口
-				queryString : {
-					name : 1
-				},//可选,筛选条件(下一版有空时补充)
-				firstRequest : false,//必选，初始化时是否请求数据
-				render : function(data){//必选，渲染每页内容
-					console.log(data);
+			//JSON格式数据
+			var data = [
+				{
+					name : "我是图片1",
+					anchorHref : "https://www.baidu.com/",
+					imageUrl : "http://static.ikindness.cn/image/banner/1.jpg"
+				},
+				{
+					name : "我是图片2",
+					anchorHref : "http://www.qq.com/",
+					imageUrl : "http://static.ikindness.cn/image/banner/2.jpg"
+				},
+				{
+					name : "我是图片3",
+					anchorHref : "https://www.taobao.com/",
+					imageUrl : "http://static.ikindness.cn/image/banner/3.jpg"
+				},
+				{
+					name : "我是图片4",
+					anchorHref : "https://www.tmall.com/",
+					imageUrl : "http://static.ikindness.cn/image/banner/4.jpg"
+				},
+				{
+					name : "我是图片5",
+					anchorHref : "https://www.163.com/",
+					imageUrl : "http://static.ikindness.cn/image/banner/5.jpg"
+				},
+				{
+					name : "我是图片6",
+					anchorHref : "https://www.sohu.com/",
+					imageUrl : "http://static.ikindness.cn/image/banner/6.jpg"
+				},
+				{
+					name : "我是图片7",
+					anchorHref : "https://www.1688.com/",
+					imageUrl : "http://static.ikindness.cn/image/banner/7.jpg"
+				}
+			];
+			var dataLen = data.length;
+			//创建一个客户端分页组件
+			Pagination({
+				element : ".pagination", //必需, 分页插入的页面位置 (选择器字符串)
+				index : 0, //非必需, 初始页码下标 (默认0)
+				size : 1, //必需, 每页数据长度
+				total : dataLen, //必需, 总页数
+				controller : 1, //非必需, 是否启用前后翻页控制 (默认0:不启用, 1:启用)
+				render : function(index){ //每页数据呈现区渲染方法, index 当前页码
+					var size = this.size, //设置当前页数据长度
+						i = index * size, //设置当前页数据开始下标
+						arrShowcase = []; //设置当前页数据呈现区元素集合
+					while(i < Math.min((index + 1) * size, dataLen)){ //遍历当前页数据
+						arrShowcase.push(JSON.stringify(data[i++])); //创建单条数据呈现内容并新增至当前页数据呈现区元素集合中
+					}
+					document.querySelector(".showcase").innerText = arrShowcase.join(""); //组合单条数据呈现内容并新增至页面数据呈现区中
 				}
 			});
 		</script>
